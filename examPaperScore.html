@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="app/css/paper.css">
+    <title>Document</title>
+    <style>
+        .el-table__expanded-cell[class*=cell]{
+            padding:0;!important;
+        }
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div id="app" v-cloak>
+    <div class="header">
+        <a style="color: #fff;margin-left: 2vw;" class="button1"><i class="el-icon-arrow-left" style="font-size: 20px;"></i></a>
+        <span style="margin-left:34vw;">练习报告</span>
+    </div>
+    <div style="background: #cc66cc;height:20vh;color:#fff;padding-left: 10px;margin-top: 5vh">
+            总分
+        <span style="font-size: 60px;margin-left:28vw;height:20vh;line-height: 20vh;">
+            {{answer}}
+        </span>分
+    </div>
+    <template>
+        <el-table
+                :data="sub"
+                style="width: 100%" >
+            <el-table-column type="expand" style="padding: 0;">
+                <template slot-scope="props" style="padding: 0;">
+                    <el-table
+                            :data="props.row.data"
+                            height="250"
+                            border
+                            style="width: 100%;padding:0;margin-top:-15px;"
+                            :default-sort = "{prop: 'timu_seq', order: ' ascending'}"
+                            @cell-click="clickRow">
+                        <el-table-column
+                                prop="timu_seq"
+                                sortable
+                                label="题号"
+                                width="">
+                        </el-table-column>
+                        <el-table-column
+                                prop="use_time"
+                                sortable
+                                label="用时">
+                        </el-table-column>
+                        <el-table-column
+                                prop="is_right"
+                                sortable
+                                label="正误">
+                        </el-table-column>
+                    </el-table>
+                </template>
+            </el-table-column>
+            <el-table-column
+                    label="科目"
+                    prop="kemu">
+            </el-table-column>
+            <el-table-column
+                    label="用时"
+                    prop="subject_use_time">
+            </el-table-column>
+            <el-table-column
+                    label="得分"
+                    prop="subject_score">
+            </el-table-column>
+        </el-table>
+    </template>
+    <div style="width: 100vw;text-align: center;margin:2vh 0;">
+        <el-button @click="goparse" type="primary" icon="el-icon-search" size="small" style="width: 100%;background-color: #cc66cc;border-color: #cc66cc">全部解析</el-button>
+    </div>
+
+</div>
+
+<script src="public/examPaperScore.js"></script>
+<script src="js/jquery-1.8.3.min_a6ffa58.js"></script>
+<script src="js/bridge1.js"></script>
+<script type="text/javascript">
+</script>
+</body>
+</html>

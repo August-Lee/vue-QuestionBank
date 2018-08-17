@@ -1,0 +1,145 @@
+*{
+    margin:0;
+    padding:0;
+}
+body {
+    font: 15px "microsoft yahei", Arial, sans-serif;
+}
+a{
+    text-decoration: none;
+    color:#555;
+}
+ul,li{
+    list-style: none;
+}
+.rt{
+    float: right;
+}
+.lf{
+    float: left;
+}
+.clear{
+   clear: both;
+}
+.header{
+    width:100vw;
+    height:6vh;
+    background:#cc66cc;
+    line-height: 6vh;
+    color:#fff;
+    font-size: 16px;
+    position: fixed;
+    top:0;
+    z-index:10;
+}
+
+.time {
+    font-size: 13px;
+    color: #999;
+}
+
+.bottom {
+    margin-top: 13px;
+    line-height: 12px;
+}
+
+.button {
+    padding: 0;
+    float: right;
+}
+
+.image {
+    width: 100%;
+    display: block;
+}
+
+.clearfix:before,
+.clearfix:after {
+    display: table;
+    content: "";
+}
+
+.clearfix:after {
+    clear: both
+}
+.image{
+    width:130px;
+    float: left;
+    margin: 10px;
+}
+.main{
+    margin-top:6vh;
+    max-height: 84vh;
+    overflow: scroll;
+}
+.ul li{
+    margin-left:10px;
+    float: left;
+}
+.ul li span{
+    display: block;
+    border-radius:18px;
+    border:1px solid #ddd;
+    float: left;
+    width:34px;
+    height:34px;
+    text-align: center;
+    line-height: 35px;
+    margin:15px 7px;
+}
+.li-act{
+    background: #01BFA5;
+    color:#fff;
+}
+.li-x{
+    background: #EF5350;
+    color:#fff;
+}
+.li-biao{
+    background: orange;
+    color:#fff;
+}
+.footer{
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+    border-top:1px solid #ddd;
+    text-align: center;
+    color:#555;
+    background: #fff;
+}
+.footer a{
+    text-decoration: none;
+    color:#555;
+}
+.footer li{
+    float: left;
+    width: 33%;
+    padding:8px 0;
+}
+.el-table th>.cell,.el-table .cell{
+    text-align: center;
+}
+.xuanxiang .el-radio:first-child{
+    padding-left:30px;
+}
+.timu img{
+    max-width: 80vw;
+    margin-left: 5vw;
+}
+label,.el-radio__label{
+    max-width: 90vw;
+    overflow: auto;
+    word-break:break-all;
+    white-space:pre-wrap;
+}
+.xuanxiang{
+    margin-bottom:10vh;
+    width: 100vw;
+}
+.el-message-box{
+    width:70vw;
+}
+[v-cloak] {
+    display: none;
+}

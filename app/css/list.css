@@ -1,0 +1,62 @@
+*{
+    margin:0;
+    padding:0;
+}
+body {
+    font: 16px "microsoft yahei", Arial, sans-serif;
+}
+ul,li{
+    list-style: none;
+}
+.rt{
+    float: right;
+}
+.lf{
+    float: left;
+}
+.clear{
+   clear: both;
+}
+a{
+    text-decoration: none;
+    color:#555;
+}
+.header{
+    width:100vw;
+    height:6vh;
+    background:#cc66cc;
+    line-height: 6vh;
+    color:#fff;
+    font-size: 16px;
+}
+.el-collapse-item__header{
+    padding-left: 10px;
+}
+.el-collapse-item__content{
+    padding: 0;
+}
+li{
+    color:#555;
+    padding:0 20px;
+    height:37px;
+    line-height: 37px;
+}
+.ul-li{
+    width: 24%;
+    padding: 0;
+    text-align: center;
+    height:5vh;
+    line-height: 5vh;
+    background: #409EFF;
+    color:#fff;
+    border-right: 1px solid #fff;
+}
+.el-button{
+    padding:5px;
+    font-size: 12px;
+    border-radius: 12px
+}
+.el-menu--horizontal>.el-menu-item{
+    width: 25%;
+    text-align: center;
+}

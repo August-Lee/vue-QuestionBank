@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="app/css/list.css">
+    <style>
+        p{
+            width: 70vw;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+
+        }
+        li{
+            border-bottom: 1px solid #ddd;
+            height:40px;
+            line-height: 40px;
+        }
+        .active{
+          background-color: #f5f5f5;
+        }
+        [v-cloak]{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div id="app" v-cloak>
+    <div class="header">
+        <a class="button1" style="color:#fff;margin-left: 2vw;"><i class="el-icon-arrow-left" style="font-size: 20px;"></i></a>
+        <span style="margin-left:35vw;">错题列表</span>
+    </div>
+    <ul>
+        <li v-if="point_id!=null" v-for="(v,k) in answer" :class="[v.flag==2? 'active':'']">
+            <a :href="'wrongInterface.html?pointId='+point_id+'&timu='+k">
+                <p class="lf">{{k+1}}、{{v.title}}</p>
+                <el-button type="primary" icon="el-icon-edit" class="rt" style="padding: 3px;margin-top: 8px;background: #cc66cc;border-color:#cc66cc "></el-button>
+                <div class="clear"></div>
+            </a>
+        </li>
+        <li v-if="id!=null" v-for="(v,k) in answer" :class="[v.flag==2? 'active':'']">
+            <a :href="'wrongInterface.html?kemu='+id+'&timu='+k">
+                <p class="lf">{{k+1}}、{{v.title}}</p>
+                <el-button type="primary" icon="el-icon-edit" class="rt" style="padding: 3px;margin-top: 8px;background: #cc66cc;border-color:#cc66cc "></el-button>
+                <div class="clear"></div>
+            </a>
+        </li>
+    </ul>
+</div>
+
+<script src="public/wrongAnswer.js"></script>
+<script src="js/jquery-1.8.3.min_a6ffa58.js"></script>
+<script src="js/bridge2.js"></script>
+<script type="text/javascript">
+</script>
+</body>
+</html>

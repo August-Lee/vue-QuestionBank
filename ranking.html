@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div id="app" v-cloak>
+    <div class="header">
+        <a class="button1" style="color:#fff"><i class="el-icon-arrow-left" style="font-size: 20px;"></i></a>
+        <span style="margin-left:35vw;">考试排名</span>
+    </div>
+    <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal">
+        <!--<el-menu-item :index="v.id" :cid="v.id" v-for="(v,k) in list" :key="k" @click="clickList($event)">{{v.name}}</el-menu-item>-->
+        <el-menu-item index="1" @click="clickList($event)">一模</el-menu-item>
+        <el-menu-item index="2" @click="clickList($event)">二模</el-menu-item>
+        <el-menu-item index="3" @click="clickList($event)">三模</el-menu-item>
+    </el-menu>
+    <div class="line"></div>
+            <el-table
+                    ref="singleTable"
+                    :data="tableData"
+                    highlight-current-row
+                    style="width: 100vw">
+
+                <el-table-column
+                        prop="name"
+                        label="用户"
+                        >
+                </el-table-column>
+                <el-table-column
+                        prop="zong"
+                        label="管综"
+                        >
+                </el-table-column>
+                <el-table-column
+                        prop="eng"
+                        label="英语"
+                        >
+                </el-table-column>
+                <el-table-column
+                        prop="num"
+                        label="总分"
+                        >
+                </el-table-column>
+                <el-table-column
+                        prop="rank"
+                        label="排名"
+                        fixed="right"
+                >
+                </el-table-column>
+            </el-table>
+
+</div>
+<script src="public/ranking.js"></script>
+<style>
+    .el-message-box{
+        width:60vw;
+    }
+    .el-collapse-item__arrow{
+        margin-right: 20px;!important;
+    }
+    .el-menu--horizontal>.el-menu-item{
+        width: 33%;
+    }
+    .el-table_1_column_5 .cell{
+        text-align: center;
+    }
+</style>
+<script src="js/jquery-1.8.3.min_a6ffa58.js"></script>
+<script src="js/bridgeXXX.js"></script>
+<script type="text/javascript">
+</script>
+</body>
+</html>

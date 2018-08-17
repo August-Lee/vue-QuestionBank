@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div id="app" v-cloak>
+    <div class="header">
+        <a class="button1" style="color:#fff;margin-left: 2vw;"><i class="el-icon-arrow-left" style="font-size: 20px;"></i></a>
+        <span style="margin-left:35vw;">错题列表</span>
+    </div>
+    <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal">
+        <el-menu-item :index="v.id" :cid="v.id" v-for="(v,k) in list" :key="k" @click="clickList($event)">{{v.name}}</el-menu-item>
+    </el-menu>
+    <div class="line"></div>
+    <div v-if="subject==undefined">
+
+    </div>
+    <el-collapse v-if="subject!=undefined" accordion v-for="(v,key) in subject" :key="key">
+        <el-collapse-item>
+            <template slot="title">
+                <i class="header-icon el-icon-circle-plus"></i> {{v.point_name}} <a :href="'wrongInterface.html?pointId='+v.point_id+'&timu=0'">
+                <i class="header-icon el-icon-edit-outline rt" style="margin-top: 12px;font-size: 20px;"></i></a>
+            </template>
+            <ul v-show="v.point_value!=''">
+                <li  v-for="(z,n) in v.point_value" :key="n">
+                    <a  v-if="z.complete!=z.whole" :href="'wrongInterface.html?kemu='+z.id+'&timu=0'">
+                    <span class="lf" > {{z.exam_point_name}}</span>
+                    <span class="rt" style="color: #aaaaaa" :data-id="z.id" :tihao-id="z.complete">({{z.whole}})<el-button type="primary" icon="el-icon-edit" circle></el-button></span>
+                    </a>
+                </li>
+            </ul>
+        </el-collapse-item>
+    </el-collapse>
+</div>
+<script src="public/wrongList.js"></script>
+<style>
+    .el-message-box{
+        width:60vw;
+    }
+    .el-collapse-item__arrow{
+        margin-right: 20px;!important;
+    }
+</style>
+<script src="js/jquery-1.8.3.min_a6ffa58.js"></script>
+<script src="js/bridge1.js"></script>
+<script type="text/javascript">
+</script>
+</body>
+</html>

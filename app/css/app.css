@@ -1,0 +1,74 @@
+*{
+    margin:0;
+    padding:0;
+}
+body {
+    font: 14px "microsoft yahei", Arial, sans-serif;
+}
+ul li{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+    color:#555;
+}
+.rt{
+    float: right;
+}
+.lf{
+    float: left;
+}
+.clear{
+   clear: both;
+}
+.header{
+    width:100vw;
+    height:6vh;
+    background:#409EFF;
+    line-height: 6vh;
+    color:#fff;
+    text-align: center;
+    font-size: 16px;
+}
+.el-input--suffix .el-input__inner{
+    background:#409EFF;
+    border:0px;
+    color:#fff;
+    width:100px;
+    height:5vh
+}
+.title{
+    padding-left:20px;
+}
+.card{
+    width: 38%;
+    text-align: center;
+    /*margin:20px;*/
+    padding:10px 0px;
+    border: 1px solid #409EFF;
+    border-radius: 5px;
+    box-shadow: #409EFF 1px 1px 1px;
+}
+.el-select .el-input .el-select__caret{
+    color:#fff;
+}
+.ul li{
+    float: left;
+    width: 50%;
+    text-align: center;
+    padding:5px 0;
+}
+.el-button{
+    height:100px;
+    width:100px;
+    border-radius:60px;
+    font-size: 30px;
+    padding:2px 12px;
+    margin:15px 0;
+}
+.center{
+    border-bottom:1px solid #409EFF;
+    padding:20px 0;
+    text-align: center;
+    color:#409EFF
+}

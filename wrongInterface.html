@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="app/css/paper.css">
+    <link rel="stylesheet" href="app/css/animate.css">
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<script type="text/x-mathjax-config">
+       MathJax.Hub.Config({
+            extensions: ["tex2jax.js"],
+            jax: ["input/TeX","output/HTML-CSS"],
+            tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]}
+       });
+</script>
+<script type="text/javascript" src="MathJax/MathJax.js"></script>
+<body>
+<div id="app" v-cloak>
+    <div class="header">
+        <a href="wrongList.html" style="color:#fff;margin-left: 2vw;"><i class="el-icon-arrow-left" style="font-size: 20px;"></i></a>
+        <span style="margin-left:32vw;" id="mytime" ></span>
+        <More></More>
+    </div>
+        <div class="main">
+            <!--<v-touch style="touch-action: pan-y!important;" class="huadong" v-on:swipeleft="onSwipeLeft()" v-on:swiperight="onSwipeRight()">-->
+            <div class="tihao" style="margin:5px;">
+                <span>【 {{cue.point_name}} 】</span> <span>( {{Number(timuId)+1}} / {{cue.whole}} )</span>
+            </div>
+            <div v-html="timu" class="timu" style="padding: 0px 20px 30px 20px;line-height:1.5;text-indent: 2em;max-height: 45vh;overflow: scroll;padding-bottom: 15px;border-bottom: 1px dashed #cc66cc">
+            </div>
+            <!--</v-touch>-->
+            <div>
+                <el-radio-group v-if="question_type==1||question_type==3"  v-model="radio1" @change="radioChange" class="xuanxiang">
+                    <el-radio  :label="v.option" v-for="(v,k) in htm" :key="k" style="display: block"><span>{{v.option}}、</span><span v-html="v.list"></span></el-radio>
+                </el-radio-group>
+                <el-tabs v-if="question_type==2" type="border-card" v-model="answer_type" style="margin-bottom: 10vh;">
+                    <el-tab-pane label="文本输入" name="1">
+                        <el-input
+                                type="textarea"
+                                :rows="10"
+                                placeholder="请输入内容"
+                                v-model="radio1">
+                        </el-input>
+                        <div style="text-align: center">
+                            <el-button @click="setText" type="primary" icon="el-icon-upload2" style="margin: 10px auto 0px auto;">提交答案</el-button>
+                        </div>
+                    </el-tab-pane>
+                    <el-tab-pane label="图片上传" name="2">
+                        <el-upload
+                                action="http://bl.mxmba.com/index.php?c=tiku_exam_point_ctrl&m=upload_file"
+                                list-type="picture-card"
+                                :file-list="fileList2"
+                                :on-success="sendSuccess"
+                                :on-preview="handlePictureCardPreview"
+                                :on-change="sendChange"
+                                :on-remove="handleRemove">
+                            <!--<i v-else class="el-icon-plus avatar-uploader-icon"></i>-->
+                            <i class="el-icon-plus"></i>
+                        </el-upload>
+                        <div style="text-align: center">
+                            <el-button type="primary" @click="setImg" icon="el-icon-upload2" style="margin: 10px auto 0px auto;">提交答案</el-button>
+                        </div>
+                        <el-dialog :visible.sync="dialogVisible2" width="80vw">
+                            <img style="width: 100%;" :src="dialogImageUrl" alt="">
+                        </el-dialog>
+                    </el-tab-pane>
+                </el-tabs>
+                <div v-if="question_type==4">
+                    <p style="padding:5px 10px;text-indent: 2em"> {{Number(timuId)+1}}、{{timu_title}}</p>
+                    <el-radio-group  v-model="radio1" @change="radioChange" class="xuanxiang">
+                        <el-radio  :label="v.option" v-for="(v,k) in htm" :key="k" style="display:block">{{v.option}}、{{v.list}}</el-radio>
+                    </el-radio-group>
+                </div>
+            </div>
+
+            <div v-if="question_type==1||question_type==3" style="width:85vw;border-top:1px solid #ddd;margin:20px;padding: 10px;margin-bottom:10vh;overflow: scroll;" v-show="isShow">
+                <p>正确答案：<span style="color:#e4393c">{{all.right_answer}}</span>   选择答案：<span style="color:#e4393c">{{radio1}}</span></p>
+                <p style="margin-top: 5px;" v-show="all.diffcult!='0.0'"><span class="lf" >试题难度：</span>
+                    <el-rate v-model="all.diffcult" disabled show-score text-color="#ff9900" score-template="{value}" class="lf">
+                    </el-rate>
+                <div class="clear"></div>
+                </p>
+                <p style="margin-top: 5px;">
+                    习题考点：<span style="color:#e4393c">{{all.exam_point_name}}</span>
+                </p>
+                <p style="margin-top: 5px;">
+                    本站统计：本题共被作答<span style="color:#e4393c">{{all.answer_number}}</span>次，正确率<span style="color:#e4393c">{{all.right_ercentage}}</span>，易错选项为<span style="color:#e4393c">{{all.error}}</span>。
+                </p>
+                <p style="margin-top: 5px;">
+                    解析：<span style="color:#e4393c" v-html="all.analysis" class="analysis"></span>
+                </p>
+                <!--<p style="margin-top: 5px;">-->
+                    <!--推荐视频：-->
+                    <!--<el-row>-->
+                        <!--<img src="public/img/shuxue-qianghua.jpg" class="image">-->
+                    <!--</el-row>-->
+                <!--</p>-->
+            </div>
+            <div v-if="question_type==2" style="width:85vw;border-top:1px solid #ddd;margin:20px;padding: 10px;margin-bottom:10vh;overflow: scroll;" v-show="isShow">
+                <p>示例范文：<span style="color:#e4393c">{{all.right_answer}}</span></p>
+                <p style="margin-top: 5px;" v-show="all.diffcult!='0.0'"><span class="lf">试题难度：</span>
+                    <el-rate v-model="all.diffcult" disabled show-score text-color="#ff9900" score-template="{value}" class="lf">
+                    </el-rate>
+                <div class="clear"></div>
+                </p>
+                <p style="margin-top: 5px;">
+                    习题考点：<span style="color:#e4393c">{{all.exam_point_name}}</span>
+                </p>
+                <p style="margin-top: 5px;">
+                    本站统计：本题共被作答<span style="color:#e4393c">{{all.answer_number}}</span>次
+                </p>
+                <p style="margin-top: 5px;">
+                    解析：<span style="color:#e4393c" v-html="all.analysis" class="analysis"></span>
+                </p>
+                <!--<p style="margin-top: 5px;">-->
+                    <!--推荐视频：-->
+                    <!--<el-row>-->
+                        <!--<img src="public/img/shuxue-qianghua.jpg" class="image">-->
+                    <!--</el-row>-->
+                <!--</p>-->
+            </div>
+        </div>
+    <ul class="footer">
+        <li>
+            <a v-if="point_id==null" :href="'wrongAnswer.html?id='+kemu+'&question_id='+shijuan">
+                <i class="el-icon-tickets" style="font-size: 24px;"></i><br>
+                <span>错题列表</span>
+            </a>
+            <a v-if="point_id!=null" :href="'wrongAnswer.html?point_id='+point_id+'&question_id='+shijuan">
+                <i class="el-icon-tickets" style="font-size: 24px;"></i><br>
+                <span>错题列表</span>
+            </a>
+        </li>
+        <li @click="handleChange">
+            <i class="el-icon-search" style="font-size: 24px;"></i><br>
+            <span>{{remark}}</span>
+        </li>
+        <li @click="dialogVisible = true">
+            <i class="el-icon-zoom-in" style="font-size: 24px;"></i><br>
+            <span>{{is_wrong}}</span>
+        </li>
+    </ul>
+    <i class="el-icon-arrow-left" @click="onSwipeRight()" style="font-size: 40px;background: #ccc;opacity: .3;padding: 10px 0;position: fixed;top:40vh;"></i>
+    <i class="el-icon-arrow-right" @click="onSwipeLeft()" style="font-size: 40px;background: #ccc;opacity: .3;padding: 10px 0;position: fixed;top:40vh;right:0;"></i>
+    <el-dialog
+            title="提示"
+            :visible.sync="dialogVisible"
+            width="70%"
+            :before-close="handleClose">
+        <span>确认将本题{{is_wrong}}库？</span>
+        <span slot="footer" class="dialog-footer">
+    <el-button @click="dialogVisible = false">取 消</el-button>
+    <el-button type="primary" @click="yichu">确 定</el-button>
+  </span>
+    </el-dialog>
+    <el-dialog
+            title="试题纠错"
+            :visible.sync="dialogVisible1"
+            width="76%"
+            :before-close="handleClose">
+        <el-form>
+            <el-radio-group v-model="radio"  @change="checkChange" class="RadioGroup">
+                <el-radio v-for="(v,k) in checkList" :label="v.id" :key="k" class="lf">{{v.name}}</el-radio>
+            </el-radio-group>
+            <el-input
+                    type="textarea"
+                    :rows="5"
+                    placeholder="请输入内容..."
+                    v-model="textarea"
+                    style="margin-top:10px;">
+            </el-input>
+            <el-button type="danger" @click="onSubmit" size="mini" style="float:right;margin-top:10px;">确 定</el-button>
+            <div class="clear"></div>
+        </el-form>
+    </el-dialog>
+    <div id="none" style="display: none" v-html="allData">
+    </div>
+</div>
+<script src="public/wrongInterface.js"></script>
+
+<style>
+    .MathJax_Display{
+        display: inline!important;
+        width: auto;
+    }
+    #MathJax_Message{
+        display: none!important;
+    }
+    .RadioGroup .el-radio{
+        padding-left:10px;
+    }
+    .el-message-box{
+        width:60vw;
+    }
+    .el-radio{
+        height:auto;
+        line-height: 40px;
+        display: inline-block;
+    }
+    .huadong{
+        touch-action: pan-y!important;
+    }
+    .el-dialog__body .el-radio{
+        margin-left: 0;!important;
+    }
+    .analysis img{
+        max-width: 85vw;
+    }
+</style>
+<script type="text/javascript">
+</script>
+</body>
+</html>

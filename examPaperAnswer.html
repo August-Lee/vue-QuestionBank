@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="app/css/paper.css">
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div id="app" v-cloak>
+    <div class="header">
+        <a style="color: #fff;margin-left: 2vw;" class="button1"><i class="el-icon-arrow-left" style="font-size: 20px;"></i></a>
+        <span style="margin-left:37vw;">答题卡</span>
+    </div>
+    <ul style="width: 100%;margin-top:7vh;height:4vh;">
+        <li class="lf" style="text-align: center;width: 33%;height:4vh;">
+            <i class="lf" style="display:block;margin-left:35px;width:15px;height:15px;margin-top:5px;border-radius: 15px;background-color: #01BFA5"></i>
+            <span class="lf" style="margin-left:5px;line-height: 4vh;">答过</span>
+        </li>
+        <li class="lf" style="text-align: center;width: 33%;height:4vh;">
+            <i class="lf" style="display:block;margin-left:35px;width:15px;height:15px;margin-top:5px;border-radius: 15px;background-color: yellow"></i>
+            <span class="lf" style="margin-left:5px;line-height: 4vh;">标记</span>
+        </li>
+        <li class="lf" style="text-align: center;width: 33%;height:4vh;">
+            <i class="lf" style="display:block;margin-left:35px;width:15px;height:15px;margin-top:5px;border-radius: 15px;border:1px solid #aaa;"></i>
+            <span class="lf" style="margin-left:5px;line-height: 4vh;">未作答</span>
+        </li>
+    </ul>
+    <ul class="ul" style="padding-bottom: 10vh">
+        <li v-for="(v,k) in answer">
+            <a :href="'examPaperInterface.html?shijuan='+shijuan+'&timuId='+v.global_id">
+                <span v-bind:class="{ 'li-act': v.flag==1,'li-biao':v.flag==2}">{{Number(v.complete)+1}}</span>
+            </a>
+        </li>
+        <div class="clear"></div>
+    </ul>
+
+    <ul @click="dialogVisible1 = true" style="position: fixed;bottom: 0;width: 100vw;height:7vh;line-height: 7vh;background: #cc66cc;color:#fff;text-align: center">
+        交卷
+    </ul>
+    <el-dialog
+            title="提示"
+            :visible.sync="dialogVisible1"
+            width="70%"
+            :before-close="handleClose">
+        <span>确认交卷？</span>
+        <span slot="footer" class="dialog-footer">
+    <el-button @click="dialogVisible1 = false">取 消</el-button>
+    <el-button @click="sendPaper" type="primary">确定</el-button>
+  </span>
+    </el-dialog>
+</div>
+
+<script src="public/examPaperAnswer.js"></script>
+<script src="js/jquery-1.8.3.min_a6ffa58.js"></script>
+<script src="js/bridge2.js"></script>
+<script type="text/javascript">
+</script>
+</body>
+</html>
